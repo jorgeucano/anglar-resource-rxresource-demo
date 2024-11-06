@@ -88,7 +88,7 @@ Recorda que el status se maneja por numeros, pero con la constante `ResourceStat
 ```html
 <h1>adviceResource: [{{ resourceStatus[this.adviceResource.status()] }}]</h1>
 @if (this.adviceResource.status() === 2) {
-    <loader/>
+    <loading-spinner />
 }
 @else if (this.adviceResource.status() === 4) {
   <h1>{{ this.adviceResource.value()?.slip.advice }}</h1>
@@ -117,7 +117,7 @@ En tanto el html se veria identico al de resource
 ```html
 <h1>adviceRxResource: [{{ resourceStatus[this.adviceRxResource.status()] }}]</h1>
 @if (this.adviceRxResource.status() === 2) {
-    <loader/>
+    <loading-spinner />
 }
 @else if (this.adviceRxResource.status() === 4) {
   <h1>{{ this.adviceRxResource.value()?.slip.advice }}</h1>
@@ -127,5 +127,5 @@ En tanto el html se veria identico al de resource
 ### Como parametrizamos?
 
 Una cosa interesante, es como manejamos los parametros, como vamos a agregar cosas a nuestras llamadas, simplemente marcando datos y rellamando y demas?
-La realidad, es que no, vamos a manejarnos cada vez mas con las reactivas primitivas y esto va a ser un GOLAZO de mitad de cancha, porque vamos a escribir `menos` codigo y vamos a ser `mas` eficientes.
+La realidad, es que no, vamos a manejarnos cada vez mas con las reactivas primitivas y esto va a ser un GOLAZO de mitad de cancha, porque vamos a escribir `menos codigo` y vamos a ser `mas eficientes`.
 
