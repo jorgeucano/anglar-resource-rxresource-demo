@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, effect, inject, resource, ResourceStatus } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
+import { LoaderSpinnerComponent } from './loading-spinner/app.loading-spinner.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, LoaderSpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

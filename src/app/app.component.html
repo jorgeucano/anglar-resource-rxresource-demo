@@ -1,7 +1,11 @@
 <h1>advice: {{ advice }}</h1>
 
 
+
 <h1>adviceResource: [{{ resourceStatus[this.adviceResource.status()] }}]
+@if (this.adviceResource.status() === 2) {
+  <app-loader-spinner />
+}
 @if (this.adviceResource.status() === 4) {
   {{ this.adviceResource.value()?.slip.advice }}
 }
@@ -9,6 +13,9 @@
 
 
 <h1>adviceRxResource: [{{ resourceStatus[this.adviceRxResource.status()] }}]
+  @if (this.adviceRxResource.status() === 2) {
+    <app-loader-spinner />
+  }  
   @if (this.adviceRxResource.status() === 4) {
     {{ this.adviceRxResource.value()?.slip.advice }}
   }

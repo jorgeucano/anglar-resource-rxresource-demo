@@ -67,10 +67,22 @@ this.adviceResource = resource({
     })
 
     effect(() => {
-      console.log('code' , ResourceStatus[this.adviceResource.status()]);
-      console.log('value', this.adviceResource.value()?.slip.advice); 
+      console.log('code status:' , ResourceStatus[this.adviceResource.status()]);
+      console.log('value: ', this.adviceResource.value()?.slip.advice); 
     })
     
+```
+
+Recorda que el `status` se maneja por numero/codigo, pero con la constante `ResourceStatus` que ya viene en `@angular/core` podemos obtener el valor en texto de este status, y asi poder manejar nuestros loaders o cosas por el estilo.
+Los 6 valores posibles son: 
+```ts
+Idle = 0,      // `value()` will be `undefined`
+Error = 1,     // `value()` will be `undefined`
+Loading = 2,   // `value()` will be `undefined`
+Reloading = 3, // The resource is currently reloading a fresh value for the same request.
+               //`value()` will continue to return the previously fetched value during the reloading operation.
+Resolved = 4,  // Loading has completed and the resource has the value returned from the loader.
+Local = 5      // The resource's value was set locally via `.set()` or `.update()`.
 ```
 
 Aca como siempre podemos ver la forma mas facil y sencilla para un ejemplo, `resource` recibe como parametro un objeto, que dentro tiene loader, `loader` es una funcion anonima que nos permite tener un `fetch` (adios RXJS) que de lo que obtenemos vamos a hacer un then y obtener en nuestro caso el json directo.
@@ -83,7 +95,6 @@ Ahora que podemos manejar estos efectos directamente como nostoros queramos, vam
 1 - que tenemos el status del `fetch` por lo tanto podemos usarlo para mostrar loaders o manejar cosas dentro de nuestras excepciones si llega a fallar.
 2 - el retorno del valor, el cual sera undefined hasta que tenga un valor apropiado.
 
-Recorda que el status se maneja por numeros, pero con la constante `ResourceStatus` que ya viene en `@angular/core` podemos obtener el valor en texto de este status, y asi poder manejar nuestros loaders o cosas por el estilo, como podemos ver en este html
 
 ```html
 <h1>adviceResource: [{{ resourceStatus[this.adviceResource.status()] }}]</h1>
