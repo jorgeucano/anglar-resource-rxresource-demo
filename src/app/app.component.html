@@ -1,22 +1,55 @@
 <h1>advice: {{ advice }}</h1>
 
-
-
-<h1>adviceResource: [{{ resourceStatus[this.adviceResource.status()] }}]
-@if (this.adviceResource.status() === 2) {
+@if (adviceResource.status() === 2 || adviceResource.status() === 2 || ( mtgSelectedId() !== undefined && mtgCardSignals.status() === 2)) {
   <app-loader-spinner />
 }
-@if (this.adviceResource.status() === 4) {
-  {{ this.adviceResource.value()?.slip.advice }}
+
+<h1>adviceResource: [{{ resourceStatus[adviceResource.status()] }}]
+
+@if (adviceResource.status() === 4) {
+  {{ adviceResource.value()?.slip.advice }}
 }
 </h1>
 
 
-<h1>adviceRxResource: [{{ resourceStatus[this.adviceRxResource.status()] }}]
-  @if (this.adviceRxResource.status() === 2) {
-    <app-loader-spinner />
-  }  
-  @if (this.adviceRxResource.status() === 4) {
-    {{ this.adviceRxResource.value()?.slip.advice }}
+<h1>adviceRxResource: [{{ resourceStatus[adviceRxResource.status()] }}]
+  @if (adviceRxResource.status() === 4) {
+    {{ adviceRxResource.value()?.slip.advice }}
   }
   </h1>
+
+@if (mtgCardSignals.status() === 4) {
+    <div class="container">
+      <div class="card">
+        <img src="{{mtgCardSignals.value().card.imageUrl}}" [alt]="mtgCardSignals.value().card.name">
+        <h2>{{mtgCardSignals.value().card.name}}</h2>
+        <div class="details">
+          <p><strong>Mana Cost:</strong> {{mtgCardSignals.value().card.manaCost}}</p>
+          <p><strong>Color:</strong> {{mtgCardSignals.value().card.colorIdentity}}</p>
+        </div>
+      </div>  
+  </div>
+}
+
+
+@if (mtgCard) {
+  <div class="container">
+    <div class="card">
+      <img src="{{mtgCard.imageUrl}}" [alt]="mtgCard.name">
+      <h2>{{mtgCard.name}}</h2>
+      <div class="details">
+        <p><strong>Mana Cost:</strong> {{mtgCard.manaCost}}</p>
+        <p><strong>Color:</strong> {{mtgCard.colorIdentity}}</p>
+      </div>
+    </div>  
+</div>
+}
+
+<div class="container">
+  @for (item of mtgCards; track item.id) {
+    <div class="card">
+      <h2>{{item.name}}</h2>
+      <button (click)="getCard(item.multiverseid)">Select</button>
+    </div>  
+  }
+</div>
